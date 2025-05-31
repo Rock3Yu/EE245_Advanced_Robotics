@@ -1,0 +1,3 @@
+# ! means "not ignored"
+/project/src/models/*
+/project/src/tensorboard_logs/*
