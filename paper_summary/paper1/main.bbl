@@ -1,0 +1,53 @@
+\begin{thebibliography}{9}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Hafner et~al.(2023)Hafner, Pasukonis, Ba, and Lillicrap]{hafner2023mastering}
+Danijar Hafner, Jurgis Pasukonis, Jimmy Ba, and Timothy Lillicrap.
+\newblock Mastering diverse domains through world models, 2023.
+\newblock \emph{URL https://arxiv. org/abs/2301.04104}, 2023.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and Klimov]{schulman2017proximal}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem[Haarnoja et~al.(2018)Haarnoja, Zhou, Abbeel, and Levine]{haarnoja2018soft}
+Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine.
+\newblock Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor.
+\newblock In \emph{International conference on machine learning}, pages 1861--1870. Pmlr, 2018.
+
+\bibitem[Schrittwieser et~al.(2020)Schrittwieser, Antonoglou, Hubert, Simonyan, Sifre, Schmitt, Guez, Lockhart, Hassabis, Graepel, et~al.]{schrittwieser2020mastering}
+Julian Schrittwieser, Ioannis Antonoglou, Thomas Hubert, Karen Simonyan, Laurent Sifre, Simon Schmitt, Arthur Guez, Edward Lockhart, Demis Hassabis, Thore Graepel, et~al.
+\newblock Mastering atari, go, chess and shogi by planning with a learned model.
+\newblock \emph{Nature}, 588\penalty0 (7839):\penalty0 604--609, 2020.
+
+\bibitem[Reed et~al.(2022)Reed, Zolna, Parisotto, Colmenarejo, Novikov, Barth-Maron, Gimenez, Sulsky, Kay, Springenberg, et~al.]{reed2022generalist}
+Scott Reed, Konrad Zolna, Emilio Parisotto, Sergio~Gomez Colmenarejo, Alexander Novikov, Gabriel Barth-Maron, Mai Gimenez, Yury Sulsky, Jackie Kay, Jost~Tobias Springenberg, et~al.
+\newblock A generalist agent.
+\newblock \emph{arXiv preprint arXiv:2205.06175}, 2022.
+
+\bibitem[Milani et~al.(2020)Milani, Topin, Houghton, Guss, Mohanty, Vinyals, and Kuno]{milani2020minerl}
+Stephanie Milani, Nicholay Topin, Brandon Houghton, William~H Guss, Sharada~P Mohanty, Oriol Vinyals, and Noboru~Sean Kuno.
+\newblock The minerl competition on sample-efficient reinforcement learning using human priors: A retrospective.
+\newblock \emph{Journal of Machine Learning Research}, 1:\penalty0 1--10, 2020.
+
+\bibitem[Johnson et~al.(2016)Johnson, Hofmann, Hutton, and Bignell]{johnson2016malmo}
+Matthew Johnson, Katja Hofmann, Tim Hutton, and David Bignell.
+\newblock The malmo platform for artificial intelligence experimentation.
+\newblock In \emph{Ijcai}, volume~16, pages 4246--4247, 2016.
+
+\bibitem[Wang et~al.(2023)Wang, Xie, Jiang, Mandlekar, Xiao, Zhu, Fan, and Anandkumar]{wang2023voyager}
+Guanzhi Wang, Yuqi Xie, Yunfan Jiang, Ajay Mandlekar, Chaowei Xiao, Yuke Zhu, Linxi Fan, and Anima Anandkumar.
+\newblock Voyager: An open-ended embodied agent with large language models.
+\newblock \emph{arXiv preprint arXiv:2305.16291}, 2023.
+
+\bibitem[Baker et~al.(2022)Baker, Akkaya, Zhokov, Huizinga, Tang, Ecoffet, Houghton, Sampedro, and Clune]{baker2022video}
+Bowen Baker, Ilge Akkaya, Peter Zhokov, Joost Huizinga, Jie Tang, Adrien Ecoffet, Brandon Houghton, Raul Sampedro, and Jeff Clune.
+\newblock Video pretraining (vpt): Learning to act by watching unlabeled online videos.
+\newblock \emph{Advances in Neural Information Processing Systems}, 35:\penalty0 24639--24654, 2022.
+
+\end{thebibliography}

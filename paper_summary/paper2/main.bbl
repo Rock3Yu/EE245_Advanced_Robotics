@@ -1,0 +1,119 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ray et~al.(2019)Ray, Achiam, and Amodei]{ray2019benchmarking}
+Alex Ray, Joshua Achiam, and Dario Amodei.
+\newblock Benchmarking safe exploration in deep reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:1910.01708}, 7\penalty0 (1):\penalty0 2, 2019.
+
+\bibitem[Schulman et~al.(2015)Schulman, Levine, Abbeel, Jordan, and Moritz]{schulman2015trust}
+John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz.
+\newblock Trust region policy optimization.
+\newblock In \emph{International conference on machine learning}, pages 1889--1897. PMLR, 2015.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and Klimov]{schulman2017proximal}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem[Achiam et~al.(2017)Achiam, Held, Tamar, and Abbeel]{achiam2017constrained}
+Joshua Achiam, David Held, Aviv Tamar, and Pieter Abbeel.
+\newblock Constrained policy optimization.
+\newblock In \emph{International conference on machine learning}, pages 22--31. PMLR, 2017.
+
+\bibitem[Amodei et~al.(2016)Amodei, Olah, Steinhardt, Christiano, Schulman, and Man{\'e}]{amodei2016concrete}
+Dario Amodei, Chris Olah, Jacob Steinhardt, Paul Christiano, John Schulman, and Dan Man{\'e}.
+\newblock Concrete problems in ai safety.
+\newblock \emph{arXiv preprint arXiv:1606.06565}, 2016.
+
+\bibitem[Leike et~al.(2017)Leike, Martic, Krakovna, Ortega, Everitt, Lefrancq, Orseau, and Legg]{leike2017ai}
+Jan Leike, Miljan Martic, Victoria Krakovna, Pedro~A Ortega, Tom Everitt, Andrew Lefrancq, Laurent Orseau, and Shane Legg.
+\newblock Ai safety gridworlds.
+\newblock \emph{arXiv preprint arXiv:1711.09883}, 2017.
+
+\bibitem[Hans et~al.(2008)Hans, Schneega{\ss}, Sch{\"a}fer, and Udluft]{hans2008safe}
+Alexander Hans, Daniel Schneega{\ss}, Anton~Maximilian Sch{\"a}fer, and Steffen Udluft.
+\newblock Safe exploration for reinforcement learning.
+\newblock In \emph{ESANN}, pages 143--148, 2008.
+
+\bibitem[Haviv(1996)]{haviv1996constrained}
+Moshe Haviv.
+\newblock On constrained markov decision processes.
+\newblock \emph{Operations research letters}, 19\penalty0 (1):\penalty0 25--28, 1996.
+
+\bibitem[Hadfield-Menell et~al.(2016)Hadfield-Menell, Russell, Abbeel, and Dragan]{hadfield2016cooperative}
+Dylan Hadfield-Menell, Stuart~J Russell, Pieter Abbeel, and Anca Dragan.
+\newblock Cooperative inverse reinforcement learning.
+\newblock \emph{Advances in neural information processing systems}, 29, 2016.
+
+\bibitem[Christiano et~al.(2017)Christiano, Leike, Brown, Martic, Legg, and Amodei]{christiano2017deep}
+Paul~F Christiano, Jan Leike, Tom Brown, Miljan Martic, Shane Legg, and Dario Amodei.
+\newblock Deep reinforcement learning from human preferences.
+\newblock \emph{Advances in neural information processing systems}, 30, 2017.
+
+\bibitem[Irving et~al.(2018)Irving, Christiano, and Amodei]{irving2018ai}
+Geoffrey Irving, Paul Christiano, and Dario Amodei.
+\newblock Ai safety via debate.
+\newblock \emph{arXiv preprint arXiv:1805.00899}, 2018.
+
+\bibitem[Leike et~al.(2018)Leike, Krueger, Everitt, Martic, Maini, and Legg]{leike2018scalable}
+Jan Leike, David Krueger, Tom Everitt, Miljan Martic, Vishal Maini, and Shane Legg.
+\newblock Scalable agent alignment via reward modeling: a research direction.
+\newblock \emph{arXiv preprint arXiv:1811.07871}, 2018.
+
+\bibitem[Kenton et~al.(2019)Kenton, Filos, Evans, and Gal]{kenton2019generalizing}
+Zachary Kenton, Angelos Filos, Owain Evans, and Yarin Gal.
+\newblock Generalizing from a few environments in safety-critical reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:1907.01475}, 2019.
+
+\bibitem[Dalal et~al.(2018)Dalal, Dvijotham, Vecerik, Hester, Paduraru, and Tassa]{dalal2018safe}
+Gal Dalal, Krishnamurthy Dvijotham, Matej Vecerik, Todd Hester, Cosmin Paduraru, and Yuval Tassa.
+\newblock Safe exploration in continuous action spaces.
+\newblock \emph{arXiv preprint arXiv:1801.08757}, 2018.
+
+\bibitem[Chow et~al.(2019)Chow, Nachum, Faust, Duenez-Guzman, and Ghavamzadeh]{chow2019lyapunov}
+Yinlam Chow, Ofir Nachum, Aleksandra Faust, Edgar Duenez-Guzman, and Mohammad Ghavamzadeh.
+\newblock Lyapunov-based safe policy optimization for continuous control.
+\newblock \emph{arXiv preprint arXiv:1901.10031}, 2019.
+
+\bibitem[Saunders et~al.(2017)Saunders, Sastry, Stuhlmueller, and Evans]{saunders2017trial}
+William Saunders, Girish Sastry, Andreas Stuhlmueller, and Owain Evans.
+\newblock Trial without error: Towards safe reinforcement learning via human intervention.
+\newblock \emph{arXiv preprint arXiv:1707.05173}, 2017.
+
+\bibitem[Bellemare et~al.(2013)Bellemare, Naddaf, Veness, and Bowling]{bellemare2013arcade}
+Marc~G Bellemare, Yavar Naddaf, Joel Veness, and Michael Bowling.
+\newblock The arcade learning environment: An evaluation platform for general agents.
+\newblock \emph{Journal of artificial intelligence research}, 47:\penalty0 253--279, 2013.
+
+\bibitem[Brockman et~al.(2016)Brockman, Cheung, Pettersson, Schneider, Schulman, Tang, and Zaremba]{brockman2016openai}
+Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang, and Wojciech Zaremba.
+\newblock Openai gym.
+\newblock \emph{arXiv preprint arXiv:1606.01540}, 2016.
+
+\bibitem[Tassa et~al.(2018)Tassa, Doron, Muldal, Erez, Li, Casas, Budden, Abdolmaleki, Merel, Lefrancq, et~al.]{tassa2018deepmind}
+Yuval Tassa, Yotam Doron, Alistair Muldal, Tom Erez, Yazhe Li, Diego de~Las Casas, David Budden, Abbas Abdolmaleki, Josh Merel, Andrew Lefrancq, et~al.
+\newblock Deepmind control suite.
+\newblock \emph{arXiv preprint arXiv:1801.00690}, 2018.
+
+\bibitem[Todorov et~al.(2012)Todorov, Erez, and Tassa]{todorov2012mujoco}
+Emanuel Todorov, Tom Erez, and Yuval Tassa.
+\newblock Mujoco: A physics engine for model-based control.
+\newblock In \emph{2012 IEEE/RSJ international conference on intelligent robots and systems}, pages 5026--5033. IEEE, 2012.
+
+\bibitem[Cobbe et~al.(2019)Cobbe, Klimov, Hesse, Kim, and Schulman]{cobbe2019quantifying}
+Karl Cobbe, Oleg Klimov, Chris Hesse, Taehoon Kim, and John Schulman.
+\newblock Quantifying generalization in reinforcement learning.
+\newblock In \emph{International conference on machine learning}, pages 1282--1289. PMLR, 2019.
+
+\bibitem[Ji et~al.(2023)Ji, Zhang, Zhou, Pan, Huang, Sun, Geng, Zhong, Dai, and Yang]{ji2023safety}
+Jiaming Ji, Borong Zhang, Jiayi Zhou, Xuehai Pan, Weidong Huang, Ruiyang Sun, Yiran Geng, Yifan Zhong, Josef Dai, and Yaodong Yang.
+\newblock Safety gymnasium: A unified safe reinforcement learning benchmark.
+\newblock In \emph{Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track}, 2023.
+\newblock URL \url{https://openreview.net/forum?id=WZmlxIuIGR}.
+
+\end{thebibliography}
