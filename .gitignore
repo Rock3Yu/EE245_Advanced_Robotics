@@ -1,3 +1,9 @@
 # ! means "not ignored"
 /project/src/models/*
 /project/src/tensorboard_logs/*
+
+# ignore python cache files
+__pycache__/
+
+# ignore macOS system files
+.DS_Store
