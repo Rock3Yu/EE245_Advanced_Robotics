@@ -7,8 +7,10 @@ import torch
 from parking_config import config
 # from smallCNN import SmallCNN
 import argparse
+from lr import linear_schedule
 
 TOTAL_TIMESTEPS = 500_000
+INITIAL_LR = 5e-3
 config["observation"] = {
     "type": "GrayscaleObservation",
     "observation_shape": (64, 64),
@@ -39,7 +41,7 @@ def train(algo, diff, device):
             device=device,
             learning_starts=1000,
             batch_size=256,
-            learning_rate=1e-3,
+            learning_rate=linear_schedule(INITIAL_LR),
             # policy_kwargs=policy_kwargs,
         )
     else:
@@ -48,7 +50,7 @@ def train(algo, diff, device):
             env=env,
             verbose=1,
             device=device,
-            learning_rate=1e-3,
+            learning_rate=linear_schedule(INITIAL_LR),
             tensorboard_log=f"./tensorboard_logs/{name}/",
             # policy_kwargs=policy_kwargs,
         )

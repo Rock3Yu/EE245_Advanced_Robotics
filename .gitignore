@@ -1,6 +1,6 @@
 # ! means "not ignored"
-/project/src/models/*
-/project/src/tensorboard_logs/*
+# /project/src/models/*
+# /project/src/tensorboard_logs/*
 
 # ignore python cache files
 __pycache__/
