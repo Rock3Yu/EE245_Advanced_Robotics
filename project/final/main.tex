@@ -65,35 +65,33 @@ This section reviews related work in the application of reinforcement learning (
 
 \subsection{Reinforcement Learning in Autonomous Parking}
 
+The \texttt{highway-env} environment \cite{highway-env} is a widely used platform (2.9k star on GitHub) for simulating autonomous driving scenarios, including parking tasks. The well written documentation and abided by OpenAI Gym API make it easy to use and extend. The environment provides multiple sensing modalities (Kinematics, GrayScale Image, LiDAR, etc.), continuous/discrete action spaces, and predefined scenarios with reward functions.
+
 There are several papers study the autonomous parking problem directly in the \texttt{highway-env} environment. \citet{kapoor2020model} introduces a model-based RL approach that integrates neural dynamics prediction with Signal Temporal Logic (STL) guided model predictive control, applied to robotics and autonomous driving. This approach is demonstratesd on toy robotics tasks including a parking-lot scenario. The key strenth is its use of formal task specifications to helps avoid reward-shaping issues. A weakness is that it relies on a learned model and uses computationally expensive planning.
 
 \citet{moreira2021deep}'s master's thesis proposes a deep reinforcement learning method with SAC, DDPG, and TD3 algorithms to teach a wheeled vehicle to park in confined spaces. The agents are trained in a simulated environment to follow a predefined parking trajectory. The study finds that TD3 converges fastest and achieves the most reliable policy, while SAC also learns satisfactorily but DDPG is less stable and efficient. Strengths of this work include a thorough comparison and careful designed reward function. However, the method needs to predefined the parking path manually and leaves out perception or sensing issues.
 
-\citet{lazzaroni2023automated} presents a DRL-based agent trained in different environments (a Unity-based, highway-env, and CARLA) for low-speed parking maneuvers, achieving a 97\% success rate. The paper also uses Stable-Baselines3 \cite{stable-baselines3} toolkits for training the agents, which provides a set of reliable RL algorithm implementations.
+\citet{lazzaroni2023automated} presents a DRL-based agent trained in different environments (a Unity-based, highway-env, and CARLA) for low-speed parking maneuvers, achieving a 97\% success rate. The paper also uses Stable-Baselines3 \cite{stable-baselines3} toolkits for training the agents, which provides a set of reliable RL algorithm implementations. The ego-vehicle is equipped with a 360-degree LiDAR sensor, and the agent observation also includes relative target position and self velocity. Training uses PPO algorithm with MLP. Although the high success rate is impressive, the long training time (over 60M timesteps) and needs for hyperparameter tuning are drawbacks.
 
-There also exist some YouTube videos \citep{youtube2019,youtube2022} visulizing the training process of reverse parking and parallel parking.
+Note that Stable-Baselines3 \cite{stable-baselines3} is library of reliable implementations of standard deep reinforcement learning algorithms. It is not specifically designed for autonomous driving, but provides high-quality code for many algorithms (PPO, DDPG, SAC, TD3, A2C, etc.) with consistent API. There also exist some YouTube videos \citep{youtube2019,youtube2022} visulizing the training process of reverse parking and parallel parking. The former video uses a version of Rainbow DQN on raw camera images, showing that even a complex 3D task like reverse parking can be learned but missing performance metrics and robustness analysis due to the pattern of videos. The latter one utilizes a PPO-based policy using Unity3D environment. However, details on sensors (maybe also vision-based), reward function, or evaluation are not provided.
 
-A survey paper \cite{elallid2022comprehensive} provides a comprehensive overview of RL applications in autonomous driving, not limited to only parking scenarios.
+A survey paper \cite{elallid2022comprehensive} provides a comprehensive overview of RL applications in autonomous driving, not limited to only parking scenarios. With in this survey, some instances parking tasks are discussed, including a RL-guided Monte Carlo Tree Search (MCTS) algorithm research. Strengths is its comprehensive coverage of perception, planing, and control. As it is a high-level review, however, sensor modalities for parking are not included.
 
 \subsection{Sensing Modalities in Autonomous Driving}
 
-\citet{yurtsever2020survey} provides a comprehensive survey on common practices and emerging trends. In the paper, there are serveral sensoring technologies are discussed, including vision-based sensors (monocular cameras, omnidirectional cameras, and event cameras), radar, and LiDAR (Point clouds). Firstly, \underline{vision-based sensors} have advantages in color sensing, passive sensing, and low cost due to established technology. However, their illumination sensitivity and difficulty in depth perception are significant drawbacks. \underline{Radar} sensors, on the other hand, have better long range detection, robustness to bad weather, and also low cost. However, they have lower resolution and their field of view is limited. Lastly, \underline{LiDAR} have pros in high accuracy, accuracy in depth perception, and robustness to illumination changes. However, they are expensive, heavy, and require large-scale data processing. If combing these sensors, the advantages of each sensor can be utilized.
+The operational logic of autonomous system, from a simple housekeeping robot to a complex self-driving car, can be summaryized into a foundamental loop: See, Think, Act. In this paradigm, the "See" component-perception-serves as the foundation layer upon which all subsequent capabilities are built. To meet the stringent safety and reliability demands of autonomous driving, the academic and industrial have invested significant sensing strategies: cameras (Vision), Radio Detection and Ranging (Radar), and Light Detection and Ranging (LiDAR). As no signle sensor can provide a complete and infallible representation of the environment, each sensing modality provide unique advantages and inherent limitations.
 
+\citet{yurtsever2020survey} provides a comprehensive survey on common practices and emerging trends, including serveral sensoring technologies: vision-based sensors (monocular cameras, omnidirectional cameras, and event cameras), radar, and LiDAR (Point clouds). Firstly, \underline{vision-based sensors} have advantages in color sensing, passive sensing, and low cost due to established technology. However, their illumination sensitivity and difficulty in depth perception are significant drawbacks. \underline{Radar} sensors, on the other hand, have better long range detection, robustness to bad weather, and also low cost. However, they have lower resolution and their field of view is limited. Lastly, \underline{LiDAR} have pros in high accuracy, accuracy in depth perception, and robustness to illumination changes. However, they are expensive, heavy, and require large-scale data processing. If combing these sensors, the advantages of each sensor can be utilized.
 
-
-
-
-
-
-
-
-
-
-
-
-\newpage
+Some studies also explore the integration of multiple sensing modalities. \citet{pederiva2025light} alleviates the computationally demands of tranditional detecting objects by integrating Camera and LiDAR data. Their method utilizes cutting-edge Deep Learning techniques into the feature extraction process achieving a 2.39\% accuracy improvement and 10\% parameter reduction within 10 ms inference time. The lightweight and powerful model is suitable for real-time applications.
 
 \section{Methodology 30\%}\label{sec:methodology}
+
+This section describes the methodology of this project, including task definition, environment setup, RL algorithms, observation modalities, reward function and training settings.
+
+\subsection{Task Definition}
+
+
 
 \section{Experiments 30\%}\label{sec:experiments}
 
