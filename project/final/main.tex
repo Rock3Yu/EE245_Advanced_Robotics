@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\PassOptionsToPackage{numbers, compress}{natbib}
+
+% \usepackage{neurips_2024}
+\usepackage[preprint]{neurips_2024}
+% \usepackage[final]{neurips_2024}
+% \usepackage[nonatbib]{neurips_2024}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{graphicx}       % for including graphics
+
+
+\title{EE245 Project Final Report \\ \large A Study on Reinforcement Learning for Parking: Vision/Radar/LiDAR Sensing}
+
+\author{
+  Kunyi Yu\\
+  Student ID: 862548836 \\
+  % Department of Computer Science and Engineering\\
+  University of California, Riverside\\
+  Riverside, CA 92521\\
+  kyu135@ucr.edu
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  5\% The abstract content \dots
+\end{abstract}
+
+% 7-8 pages excluding references
+% Abstract (5%)
+% Introduction (15%)
+% Related Work (15%)
+% Method (30%)
+% Experiments (30%)
+% Conclusion (5%).
+
+\section{Introduction 15\%}
+
+Traffic accidents caused by human judgment errors remain a leading cause of fatalities worldwide. However, the rapid development of autonomous driving technologies holds promise for significantly reducing such incidents. In December 2024, the author visited the Bay Area and observed a growing presence of autonomous vehicles (AVs) on the road, either undergoing testing or already in commercial operation. Waymo, one of the industry pioneers, has been operating a fleet of AVs in San Francisco since August 2021. On the other hand, unlike Waymo’s radar-based approach, Tesla’s Full Self-Driving (FSD) system relies primarily on vision-based sensing. Tesla’s commercial success demonstrates that a camera-only solution can be viable for autonomous driving.
+
+Sensing modality, like vision, Radar or LiDAR, are widely researched and adopted in the industry, each with its own advantages and limitations. A 2024 news report \cite{news2024} highlighted an incident where Waymo’s AVs were excessively honking in a San Francisco parking lot, disturbing nearby residents multiple times at night. The issue was reportedly caused by interference from other vehicles, leading to a deadlock scenario—a common challenge in multi-agent systems. This also underscores the complexity and importance of autonomous parking as a research topic.
+
+Thus, the modality of sensing is crucial for autonomous driving, especially in complex environments like parking lots where dense traffic and pedestrians could lead to problems such as deadlocks and security concerns. Reasonable solutions could be combined with different sensing modalities or dynamically switching between them to enhance the robustness of the system. Therefore, this project aims to explore the effectiveness of different sensing modalities in various parking scenarios by horizontally comparing the performance of several reinforcement learning (RL) algorithms. 
+
+In the rest of this report, Section \ref{sec:related_work} reviews related work in the the application of RL algorithms in autonomous parking and some common sensing modalities. Section \ref{sec:methodology} describes the methodology, including task definition, environment setup, RL algorithms, observation modalities, reward function and training settings. Section \ref{sec:experiments} presents the experimental results, including the performance comparison and findings. Finally, Section \ref{sec:conclusion} includes summary, contributions, and future work.
+
+\newpage
+
+\section{Related Work 15\%}\label{sec:related_work}
+
+This section reviews related work in the application of reinforcement learning (RL) algorithms in autonomous parking and common sensing modalities in autonomous driving. Most papers in this section are based on the \texttt{highway-env} environment \cite{highway-env}, which is the platform used in this project and also widely adopted in the autonomous driving research community.
+
+\subsection{Reinforcement Learning in Autonomous Parking}
+
+There are several papers study the autonomous parking problem directly in the \texttt{highway-env} environment. \citet{kapoor2020model} introduces a model-based RL approach that integrates neural dynamics prediction with Signal Temporal Logic (STL) guided model predictive control, applied to robotics and autonomous driving. This approach is demonstratesd on toy robotics tasks including a parking-lot scenario. The key strenth is its use of formal task specifications to helps avoid reward-shaping issues. A weakness is that it relies on a learned model and uses computationally expensive planning.
+
+\citet{moreira2021deep}'s master's thesis proposes a deep reinforcement learning method with SAC, DDPG, and TD3 algorithms to teach a wheeled vehicle to park in confined spaces. The agents are trained in a simulated environment to follow a predefined parking trajectory. The study finds that TD3 converges fastest and achieves the most reliable policy, while SAC also learns satisfactorily but DDPG is less stable and efficient. Strengths of this work include a thorough comparison and careful designed reward function. However, the method needs to predefined the parking path manually and leaves out perception or sensing issues.
+
+\citet{lazzaroni2023automated} presents a DRL-based agent trained in different environments (a Unity-based, highway-env, and CARLA) for low-speed parking maneuvers, achieving a 97\% success rate. The paper also uses Stable-Baselines3 \cite{stable-baselines3} toolkits for training the agents, which provides a set of reliable RL algorithm implementations.
+
+There also exist some YouTube videos \citep{youtube2019,youtube2022} visulizing the training process of reverse parking and parallel parking.
+
+A survey paper \cite{elallid2022comprehensive} provides a comprehensive overview of RL applications in autonomous driving, not limited to only parking scenarios.
+
+\subsection{Sensing Modalities in Autonomous Driving}
+
+\citet{yurtsever2020survey} provides a comprehensive survey on common practices and emerging trends. In the paper, there are serveral sensoring technologies are discussed, including vision-based sensors (monocular cameras, omnidirectional cameras, and event cameras), radar, and LiDAR (Point clouds). Firstly, \underline{vision-based sensors} have advantages in color sensing, passive sensing, and low cost due to established technology. However, their illumination sensitivity and difficulty in depth perception are significant drawbacks. \underline{Radar} sensors, on the other hand, have better long range detection, robustness to bad weather, and also low cost. However, they have lower resolution and their field of view is limited. Lastly, \underline{LiDAR} have pros in high accuracy, accuracy in depth perception, and robustness to illumination changes. However, they are expensive, heavy, and require large-scale data processing. If combing these sensors, the advantages of each sensor can be utilized.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\section{Methodology 30\%}\label{sec:methodology}
+
+\section{Experiments 30\%}\label{sec:experiments}
+
+\section{Conclusion 5\%}\label{sec:conclusion}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+
+\section*{Acknowledgments}
+The final project was independently conducted by the author Kunyi Yu. Meanwhile, the author would like to thank Professor Jiachen Li and TAs for their patient guidance and help.
+
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+
+\appendix
+\section*{Appendix}
+\subsection*{How to Find the Code?}
+The GitHub public repository for this project is at \url{https://github.com/Rock3Yu/EE245_Advanced_Robotics}. Please feel free to explore the code and data files. The structure of the repository is as follows:
+
+\begin{verbatim}
+  .
+  |-- final
+  |   |-- main.pdf
+  |   |-- main.tex
+  |   |-- ...
+  |-- proposal
+  |   |-- main.pdf
+  |   |-- main.tex
+  |   |-- ...
+  |-- src
+      |-- HighwayEnv
+      |-- make_gif.py
+      |-- models
+      |-- parking_config.py
+      |-- smallCNN.py
+      |-- tensorboard_logs
+      |-- train_0_kinematics.py
+      |-- train_1_vision.py
+      |-- train_2_lidar.py
+      |-- ...
+# The purpose of each dictory/file is as their name suggests.
+\end{verbatim}
+
+\end{document}

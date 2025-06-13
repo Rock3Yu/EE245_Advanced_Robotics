@@ -7,3 +7,13 @@ __pycache__/
 
 # ignore macOS system files
 .DS_Store
+
+# ignore latex auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+
