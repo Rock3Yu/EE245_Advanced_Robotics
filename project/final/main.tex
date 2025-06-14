@@ -19,6 +19,9 @@
 \usepackage{xcolor}         % colors
 \usepackage{graphicx}       % for including graphics
 \usepackage{amsmath}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{tabularx}
 
 
 \title{EE245 Project Final Report \\ \large A Study on Reinforcement Learning for Parking: Vision/Radar/LiDAR Sensing}
@@ -37,7 +40,7 @@
 \maketitle
 
 \begin{abstract}
-  5\% The abstract content \dots
+  Autonomous parking is a critical yet challenging task in self-driving systems. This project investigates the effectiveness of different sensing modalities—Vision, Radar, and LiDAR—for autonomous parking using reinforcement learning (RL). This project horizontally compare the performance of three widely-used RL algorithms (TD3, SAC, and PPO) in a simulated parking environment with varying vehicle densities. Experiments show that the choice of sensing modality and algorithm is crucial for success. The results demonstrate that Radar-based observation (Kinematics) is the most effective input, enabling off-policy agents like SAC and TD3 to achieve high success rates, with SAC reaching up to 90.9\%. In contrast, agents using Vision or LiDAR inputs, as well as the on-policy PPO algorithm, failed to learn effective parking policies under the tested configurations. These findings highlight the significant impact of observation representation on the performance and sample efficiency of RL agents in autonomous parking tasks.
 \end{abstract}
 
 % 7-8 pages excluding references
@@ -54,11 +57,9 @@ Traffic accidents caused by human judgment errors remain a leading cause of fata
 
 Sensing modality, like vision, Radar or LiDAR, are widely researched and adopted in the industry, each with its own advantages and limitations. A 2024 news report \cite{news2024} highlighted an incident where Waymo’s AVs were excessively honking in a San Francisco parking lot, disturbing nearby residents multiple times at night. The issue was reportedly caused by interference from other vehicles, leading to a deadlock scenario—a common challenge in multi-agent systems. This also underscores the complexity and importance of autonomous parking as a research topic.
 
-Thus, the modality of sensing is crucial for autonomous driving, especially in complex environments like parking lots where dense traffic and pedestrians could lead to problems such as deadlocks and security concerns. Reasonable solutions could be combined with different sensing modalities or dynamically switching between them to enhance the robustness of the system. Therefore, this project aims to explore the effectiveness of different sensing modalities in various parking scenarios by horizontally comparing the performance of several reinforcement learning (RL) algorithms. 
+Thus, the modality of sensing is crucial for autonomous driving, especially in complex environments like parking lots where dense traffic and pedestrians could lead to problems such as deadlocks and security concerns. Reasonable solutions could be combined with different sensing modalities or dynamically switching between them to enhance the robustness of the system. Therefore, this project aims to explore the effectiveness of different sensing modalities in various parking scenarios by horizontally comparing the performance of several reinforcement learning (RL) algorithms.
 
 In the rest of this report, Section \ref{sec:related_work} reviews related work in the the application of RL algorithms in autonomous parking and some common sensing modalities. Section \ref{sec:methodology} describes the methodology, including task definition, environment setup, RL algorithms, observation modalities, reward function and training settings. Section \ref{sec:experiments} presents the experimental results, including the performance comparison and findings. Finally, Section \ref{sec:conclusion} includes summary, contributions, and future work.
-
-\newpage
 
 \section{Related Work 15\%}\label{sec:related_work}
 
@@ -85,10 +86,10 @@ The operational logic of autonomous system, from a simple housekeeping robot to 
 \citet{yurtsever2020survey} provides a comprehensive survey on common practices and emerging trends, including serveral sensoring technologies: vision-based sensors (monocular cameras, omnidirectional cameras, and event cameras), radar, and LiDAR (Point clouds). Firstly, \underline{vision-based sensors} have advantages in color sensing, passive sensing, and low cost due to established technology. However, their illumination sensitivity and difficulty in depth perception are significant drawbacks. \underline{Radar} sensors, on the other hand, have better long range detection, robustness to bad weather, and also low cost. However, they have lower resolution and their field of view is limited. Lastly, \underline{LiDAR} have pros in high accuracy, accuracy in depth perception, and robustness to illumination changes. However, they are expensive, heavy, and require large-scale data processing. If combing these sensors, the advantages of each sensor can be utilized. The figure \ref{fig:sensing_modalities} illustrates the pros and cons of these three sensing modalities.
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./pics/3_sensors.png}
-    \caption{Pros and cons of common sensing modalities in autonomous driving. (from the internet)}
-    \label{fig:sensing_modalities}
+  \centering
+  \includegraphics[width=0.7\textwidth]{./pics/3_sensors.png}
+  \caption{Pros and cons of common sensing modalities in autonomous driving. (from the internet)}
+  \label{fig:sensing_modalities}
 \end{figure}
 
 Some studies also explore the integration of multiple sensing modalities. \citet{pederiva2025light} alleviates the computationally demands of tranditional detecting objects by integrating Camera and LiDAR data. Their method utilizes cutting-edge Deep Learning techniques into the feature extraction process achieving a 2.39\% accuracy improvement and 10\% parameter reduction within 10 ms inference time. The lightweight and powerful model is suitable for real-time applications.
@@ -104,10 +105,10 @@ The ultimate goal of teaching a vehicle to park is to enable it to autonomously 
 To abstract the task and make it suitable for RL research, the project used a simulated environment based on the \texttt{highway-env} platform \cite{highway-env} with varing other vechicles denseness to change the difficulty. In details, there will be \texttt{empty}, \texttt{normal}, and \texttt{almost-full} parking lots, which have 0, 3, and 10 other vehicles, respectively. The parking lot is a 2D continuous space with 15 spots for both north and south side as the figure \ref{fig:parking_lot} shows. The ego-vehicle is a 4-wheeled car can be controlled by fixed steering angles and acceleration. The success of parking is defined as the ego-vehicle being within a certain distance to the parking spot without angle requirement (but will be penalized in the reward function).
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{./pics/parking.jpg}
-    \caption{The parking lot environment \texttt{empty} with 0 other vehicles. The ego-vehicle is the green one, other vehicles are yellow, and the parking spot is the blue rectangle. There are walls on each side of the parking lot.}
-    \label{fig:parking_lot}
+  \centering
+  \includegraphics[width=0.4\textwidth]{./pics/parking.jpg}
+  \caption{The parking lot environment \texttt{empty} with 0 other vehicles. The ego-vehicle is the green one, other vehicles are yellow, and the parking spot is the blue rectangle. There are walls on each side of the parking lot.}
+  \label{fig:parking_lot}
 \end{figure}
 
 Note that the \texttt{highway-env} environment follows the OpenAI Gym API and configurations are stored in a YAML file where we can specify the action, observation, reward, vehicle number, has walls or not, and other settings. To make a gif output, \texttt{offscreen-rendering} should be unenabled.
@@ -135,18 +136,18 @@ Usually, the training settings of RL algorithms are highly influence the perform
 \end{enumerate}
 
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=0.45\textwidth]{./pics/lidar.png}
-    \caption{The LiDAR observation.}
-    \label{fig:lidar}
+  \centering
+  \includegraphics[width=0.4\textwidth]{./pics/lidar.png}
+  \caption{The LiDAR observation.}
+  \label{fig:lidar}
 \end{figure}
 
 \textbf{Reward Function.} The reward function is crucial for guiding the agent to learn the desired behavior. In this project, the reward function is designed to encourage parking while penalizing collisions and deadlocks, which remains the default setting as environment provided. The reward function is defined as follows:
 
 \begin{align*}
-    \mathbf{s} &= [x, y, v_x, v_y, \cos(h), \sin(h)]^T \\
-    \mathbf{w} &= [1, 0.3, 0, 0, 0.02, 0.02]^T \\
-    R_{\text{total}} &= (\mathbf{w}^T \mathbf{s}) - 5 \cdot \mathbb{I}(\text{collision}) + 0.12 \cdot \mathbb{I}(\text{success})
+  \mathbf{s}       & = [x, y, v_x, v_y, \cos(h), \sin(h)]^T                                                                     \\
+  \mathbf{w}       & = [1, 0.3, 0, 0, 0.02, 0.02]^T                                                                             \\
+  R_{\text{total}} & = (\mathbf{w}^T \mathbf{s}) - 5 \cdot \mathbb{I}(\text{collision}) + 0.12 \cdot \mathbb{I}(\text{success})
 \end{align*}
 
 where $\mathbf{w}^T \mathbf{s}$ reward the agent for moving towards the parking spot in a good direction, $- 5 \cdot \mathbb{I}(\text{collision})$ penalizes the agent for colliding, and $0.12 \cdot \mathbb{I}(\text{success})$ rewards the agent for successfully parking.
@@ -154,51 +155,171 @@ where $\mathbf{w}^T \mathbf{s}$ reward the agent for moving towards the parking 
 \textbf{Training Settings.} The training settings are summarized in Table~\ref{tab:training_settings}.
 
 \begin{table}[h]
-    \centering
-    \begin{tabular}{l|c}
-        \hline
-        \textbf{Parameter} & \textbf{Value} \\
-        \hline
-        Action Space & Continuous (steering angle, acceleration) \\
-        Observation Space & Varying by sensing modality (see above) \\
-        Discount Factor ($\gamma$) & 0.99 \\
-        Training Timesteps & 500,000 \\
-        Batch Size & 256 \\
-        Learning Rate & 0.001 \\
-        Target Network Update Frequency (TD3/SAC) & 1,000\\
-        Policy Update Frequency (TD3) & 2 \\
-        Entropy Coefficient (SAC) & Auto-tuned \\
-        Number of Vehicles in Environment & Varies by difficulty (0, 3, or 10) \\
-        Parking Spot Size & Configurable (default: 2m x 5m) \\
-        Maximum Detectable Distance (LiDAR) & Configurable (default: 50m) \\
-        Number of LiDAR Sectors & Configurable (default: 36) \\
-        Render Mode & RGB array for visualization and GIF \\
-        \hline
-    \end{tabular}
-    \caption{Summary of training settings.}
-    \label{tab:training_settings}
+  \centering
+  \begin{tabular}{l|c}
+    \hline
+    \textbf{Parameter}                        & \textbf{Value}                            \\
+    \hline
+    Action Space                              & Continuous (steering angle, acceleration) \\
+    Observation Space                         & Varying by sensing modality (see above)   \\
+    Discount Factor ($\gamma$)                & 0.99                                      \\
+    Training Timesteps                        & 500,000                                   \\
+    Batch Size                                & 256                                       \\
+    Learning Rate                             & 0.001                                     \\
+    Target Network Update Frequency (TD3/SAC) & 1,000                                     \\
+    Policy Update Frequency (TD3)             & 2                                         \\
+    Entropy Coefficient (SAC)                 & Auto-tuned                                \\
+    Number of Vehicles in Environment         & Varies by difficulty (0, 3, or 10)        \\
+    Parking Spot Size                         & Configurable (default: 2m x 5m)           \\
+    Maximum Detectable Distance (LiDAR)       & Configurable (default: 50m)               \\
+    Number of LiDAR Sectors                   & Configurable (default: 36)                \\
+    Render Mode                               & RGB array for visualization and GIF       \\
+    \hline
+  \end{tabular}
+  \caption{Summary of training settings.}
+  \label{tab:training_settings}
 \end{table}
 
 \section{Experiments 30\%}\label{sec:experiments}
 
-This section presents the experimental results of the project, including ...
+This section presents the experimental results of the project, where all the conducted experiments are summarized in Table \ref{tab:exp_status}. Then, performance demonstrations, findings, and analysis are provided in the following subsections.
+
+\begin{table}[h]
+  \centering
+  % \renewcommand{\arraystretch}{1.3}
+  %----------- ROW 1: Vision and Radar Tables -----------%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \textbf{vision input}
+    \vspace{0.5ex}
+    \begin{tabular}{@{}lcccc@{}}
+      \toprule
+      algo & empty & normal & almost-full \\
+      \midrule
+      TD3  & x     &        &             \\
+      SAC  & x     &        &             \\
+      PPo  & x     & x      & x           \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \textbf{radar input}
+    \vspace{0.5ex}
+    \begin{tabular}{@{}lcccc@{}}
+      \toprule
+      algo & empty              & normal & almost-full \\
+      \midrule
+      TD3  & 73.3\%             & 65.3\% &             \\
+      SAC  & \underline{90.9\%} & 81.4\% &             \\
+      PPo  & x                  & x      & x           \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+
+  \vspace{1.5em}
+
+  %----------- ROW 2: LiDAR Table and Annotations -----------%
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \textbf{LiDAR input}
+    \vspace{0.5ex}
+    \begin{tabular}{@{}lcccc@{}}
+      \toprule
+      algo & empty & normal & almost-full \\
+      \midrule
+      TD3  & x     & x      &             \\
+      SAC  & x     & x      &             \\
+      PPo  & x     & x      & x           \\
+      \bottomrule
+    \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \small
+    % \vspace{1.5em}
+    \textit{*Notes:} All experiments are run for 500k time-steps.
+    \begin{tabularx}{\linewidth}{@{}lX@{}}
+      \texttt{Blank block} & Experiment to-do.               \\
+      \texttt{[x]\%}       & Success rate of the experiment. \\
+      \texttt{x}           & Success rate is less than 10\%. \\
+    \end{tabularx}
+  \end{minipage}
+
+  \vspace{1em}
+  \caption{Summary of experimental results.}
+  \label{tab:exp_status}
+\end{table}
+
+\subsection{Performance Demonstrations}
+
+As the results in Table \ref{tab:exp_status} show, the TD3 and SAC algorithms can successfully learn to park in the \texttt{empty} and \texttt{normal} (maybe also \texttt{almost-full}) parking lots with Radar observation, while other combinations yield poor performance. The Figure \ref{fig:demo} shows the trajectories of those good experiments, where agents shows a good navigation behavior and successfully park in the parking spot without colliding with other vehicles. There are some rare cases where the agent can even learn to reverse park instead of always forward driving into the parking spot, which is a more efficient way to park in real-world scenarios.
+
+% figure group with 2 rows * 2 columns
+\begin{figure}[h]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./pics/good/kine_SAC_empty.png}
+    \caption*{SAC with Radar in the empty parking lot.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./pics/good/kine_SAC_normal.png}
+    \caption*{SAC with Radar in the normal parking lot.}
+  \end{minipage}
+
+  \vspace{1em}
+
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./pics/good/kine_TD3_empty.png}
+    \caption*{TD3 with Radar in the empty parking lot.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./pics/good/kine_TD3_normal.png}
+    \caption*{TD3 with Radar in the normal parking lot.}
+  \end{minipage}
+
+  \caption{Performance demonstrations of the successful experiments. The trajectories only show the last 5 time-steps of the agent. From gifs, we can see that the agents learned complex behaviors such as reversing and long-distance parking.}
+  \label{fig:demo}
+\end{figure}
+
+For those failed experiments, the agents either always collide with other vehicles or walls but still can reduce epoch time by lossing the game. This might be the relative small reward for successful parking ($0.12$) compared to the collision penalty ($-5$) and the sparse reward problem lead to the failure of trend-off between exploration and exploitation. A demonstration of the failed experiments is shown in Figure \ref{fig:demo_fail}, and a proof of successful reward coverage and total epoch time reduction is shown in Figure \ref{fig:coverage}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{./pics/miss/kine_PPO_almost_full.png}
+  \caption{Performance demonstration of the failed experiment (PPO with Radar in the almost-full parking lot.). The agent always collides with other vehicles or walls, but can still reduce epoch time by lossing the game.}
+  \label{fig:demo_fail}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.95\textwidth]{./pics/coverage.png}
+  \caption{Proof of successful reward coverage and total epoch time reduction. The left figure is the average epoch length, and the right figure is the average reward per epoch.}
+  \label{fig:coverage}
+\end{figure}
+
+\subsection{Findings and Analysis}
+
+\textbf{Training Time and Sample Efficiency.} The training time for each algorithm varies significantly, with PPO fastest, while TD3 and SAC require more time to converge. Another factor is the observation modality. For example, Vision-based agents has a training speed of 5 fps (frames per second) without GPU acceleration, while Radar-based and LiDAR-based agents can achieve more than 100 fps. This is because the Vision-based agents need to process high-dimensional images, which are computationally expensive, even if I tried to use a small CNN model.
+
+\textbf{Algorithm Performance.} Although in some observations, all three algorithms can not learn to park, but PPO still fails to learn a good policy using a Radar observation where TD3 and SAC can achieve a high success rate. This is because PPO is an on-policy algorithm, which requires more samples to learn a good policy. In contrast, TD3 and SAC are off-policy algorithms, which can reuse past experiences from a replay buffer, making them more sample-efficient.
+
+\textbf{Sensing Modalities.} The results show that Radar is the most effective sensing modality for parking tasks, achieving the highest success rates and fastest training times. However, it should admit that the environment is a 2D continuous simulated environment where Vision input is the up-to-down view instead of the front view or 360-degree view and the LiDAR input is a 2D array instead of a 3D point cloud. This difference may lead to the poor performance of Vision and LiDAR in this project. In real-world scenarios, Vision-based and LiDAR-based systems are more commonly used, and they can provide rich information about the environment. Therefore, it is important to further explore the performance of these modalities in more complex environments.
 
 \section{Conclusion 5\%}\label{sec:conclusion}
 
+This project aimed to evaluate the performance of different reinforcement learning algorithms (TD3, SAC, PPO) combined with various sensing modalities (Vision, Radar, LiDAR) for the autonomous parking problem. Through a series of experiments in a simulated environment, we have drawn several key conclusions.
 
+\textbf{Summary and Contributions}: Our primary finding is that the combination of off-policy algorithms (SAC and TD3) with Radar-based kinematic observations yields the best performance, successfully learning to park in empty and moderately occupied lots. The Soft Actor-Critic (SAC) algorithm, in particular, proved to be the most robust and sample-efficient, achieving the highest success rate. In contrast, the on-policy PPO algorithm and agents relying on high-dimensional Vision or LiDAR data failed to converge to a successful policy within the 500,000-timestep training budget. This suggests that for this simulated task, the abstract and direct state representation from Radar is far more conducive to learning than the raw sensory data from the other modalities, and that off-policy methods are better suited for this continuous control problem due to their superior sample efficiency.
 
-
-
-
-
-
-
-
-
-
-
-
-\newpage
+\textbf{Future Work}: While this study provides valuable insights, there are several avenues for future research. First, improving the performance of Vision and LiDAR-based agents is a key priority. This could be achieved by employing more sophisticated neural network architectures, utilizing pre-training, or transitioning to more realistic 3D simulation environments like CARLA, which better represent the richness of these sensors. Second, future work could explore sensor fusion techniques, combining the strengths of different modalities to create a more robust and reliable parking system. Finally, applying more advanced reward shaping techniques or curriculum learning could help agents tackle more complex and densely populated parking scenarios, which proved challenging in our current experiments.
 
 \section*{Acknowledgments}
 The final project was independently conducted by the author Kunyi Yu. Meanwhile, the author would like to thank Professor Jiachen Li and TAs for their patient guidance and help.

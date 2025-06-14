@@ -41,9 +41,10 @@ def make_gif(model_save_path, obs_name, algo, diff, device):
 
 
 if __name__ == "__main__":
-    model_save_path = "./models/kine_TD3_normal.zip"
-    obs_name = "kine"
-    algo = "TD3"
-    diff = "normal"
+
+    obs_name = "kine"  # kine (radar), lidar, vision
+    algo = "TD3"  # TD3, SAC, PPO
+    diff = "normal"  # empty, normal, almost_full
     device = "cpu"
+    model_save_path = f"./models/{obs_name}_{algo}_{diff}.zip"
     make_gif(model_save_path, obs_name, algo, diff, device)
